@@ -37,7 +37,7 @@ func (deviceController *DeviceController) CreateDevice(context *gin.Context) {
 	}
 
 	// trigger device creation
-	device, err := deviceController.deviceService.CreateDevice(&input)
+	deviceCreated, err := deviceController.deviceService.CreateDevice(&input)
 	if err != nil {
 		log.Error(err)
 		context.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
