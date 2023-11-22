@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package pb;
+option go_package="./api/v1;pb";
+
+service DeviceService {
+    rpc Ping (DeviceRequest) returns (DeviceResponse) {};
+    
+    rpc CreateDevice (CreateDeviceRequest) returns (CreateDeviceResponse) {};
+    
+    
+    rpc ListDevices (ListDevicesRequest) returns (ListDevicesResponse) {};
+    
+    
+    rpc GetDevice (GetDeviceRequest) returns (GetDeviceResponse) {};
+    
+    
+    rpc UpdateDevice (UpdateDeviceRequest) returns (UpdateDeviceResponse) {};
+    
+    
+}
+
+message Device {
+    int64 id = 1;
+    
+    string Name = 2;
+    
+}
+
+
+message CreateDeviceRequest {
+    Device device = 1;
+}
+
+message CreateDeviceResponse {
+    string message = 1;
+}
+
+
+
+message ListDevicesRequest {
+
+}
+
+message ListDevicesResponse {
+    repeated Device device = 1;
+}
+
+
+
+message GetDeviceRequest {
+    int64 id = 1;
+}
+
+message GetDeviceResponse {
+    Device device = 1;
+}
+
+
+
+message UpdateDeviceRequest {
+    int64 id = 1;
+    Device device = 2;
+}
+
+message UpdateDeviceResponse {
+    string message = 1;
+}
+
+
+
+
+message DeviceRequest {}
+
+message DeviceResponse {
+    string message = 1; 
+}
