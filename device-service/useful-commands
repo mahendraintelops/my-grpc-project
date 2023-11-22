@@ -1,0 +1,77 @@
+
+# grpcurl commands for gRPC Server
+
+# Install grpcurl to access grpc services
+    go get github.com/fullstorydev/grpcurl/...
+    go install github.com/fullstorydev/grpcurl/cmd/grpcurl
+
+# To check the services available
+    grpcurl -plaintext localhost:34400 list
+
+# To check the rpc's available inside a specific service
+    grpcurl -plaintext localhost:34400 list pb.BasicService
+    # grpcurl -plaintext localhost:34400 list serviceName
+
+# To run a method from a service
+    grpcurl -plaintext localhost:34400 pb.BasicService/Create
+    # grpcurl -plaintext localhost:34400 serviceName/MethodName
+
+# To describe any service
+    grpcurl -plaintext -msg-template localhost:34400 describe pb.BasicService
+    # grpcurl -plaintext -msg-template localhost:34400 describe serviceName
+
+# To describe any method
+    grpcurl -plaintext -msg-template localhost:34400 describe pb.BasicService.Get
+    # grpcurl -plaintext -msg-template localhost:34400 describe serviceName.MethodName
+
+# To describe any Message
+    grpcurl -plaintext -msg-template localhost:34400 describe pb.MessageRequest
+    # grpcurl -plaintext -msg-template localhost:34400 describe MessageName
+
+
+
+
+# Curl commands for REST Server resource Device
+
+# Post
+```
+curl -X POST -H "Content-Type: application/json" \
+-d '{"Name": "sample string"}' \
+http://localhost:4444/v1/devices
+```
+
+
+# Get
+```
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:4444/v1/devices
+```
+
+
+
+# Get  (retrieve specific Device)
+```
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:4444/v1/devices/123
+```
+
+
+
+
+# Run mysql server in docker on local
+```
+docker run --detach --name=mysql --env="MYSQL_ROOT_PASSWORD=password" --publish 3306:3306 mysql/mysql-server:latest
+```
+# when mysql throws error about server connection, fire below commands
+#
+```
+error occurred: Error 1130: Host '172.17.0.1' is not allowed to connect to this MySQL server
+```
+# More details here - https://stackoverflow.com/a/19101356/3751443
+```
+docker exec -ti mysql bash
+mysql -u root -p ### you will be prompted for password
+SELECT host FROM mysql.user WHERE User = 'root';
+CREATE USER 'root'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+```

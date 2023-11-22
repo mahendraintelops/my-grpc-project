@@ -1,0 +1,4 @@
+tenant-service
+../.idea
+.devspace
+/sqlite.db
